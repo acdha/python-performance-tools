@@ -17,7 +17,7 @@ class DisplayElapsed(object):
         self.message = message
 
         if postamble is None:
-            postamble = " ({elapsed:,.1f} seconds)"
+            postamble = " ({elapsed:.1f} seconds)"
         self.postamble = postamble
 
     def __enter__(self):
