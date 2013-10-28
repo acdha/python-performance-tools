@@ -6,7 +6,7 @@ from setuptools import setup
 
 setup(
     name='performance_tools',
-    version='0.2',
+    version='0.3',
     author='Chris Adams',
     author_email='chris@improbable.org',
     packages=['performance_tools'],

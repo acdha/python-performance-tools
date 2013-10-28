@@ -7,10 +7,12 @@ import sys
 
 class DisplayElapsed(object):
     def __init__(self, message, postamble=None, output=sys.stdout,
-                 include_timestamp=True, **context):
+                 include_timestamp=True,
+                 output_on_error=False, **context):
 
         self.context = context
         self.output = output
+        self.output_on_error = output_on_error
 
         if include_timestamp and '{now' not in message:
             message = "{now} %s" % message
@@ -24,7 +26,11 @@ class DisplayElapsed(object):
         self.output_message(self.message, end='')
         self.start = timer()
 
-    def __exit__(self, *args):
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if not self.output_on_error and exc_type is not None:
+            # Intentionally do not display messages to avoid the appearance of success
+            return False
+
         end = timer()
 
         elapsed = end - self.start
